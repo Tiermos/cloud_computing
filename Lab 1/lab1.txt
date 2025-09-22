@@ -1,0 +1,37 @@
+Lab 1
+
+1. My processor supports Intel/AMD virtualization technology and it has been enabled. Specific content please see /screenshots/virtualization.png
+
+2.
+The fundamental reason is that cloud computing can provide elastic and scalable computing resources on demand, significantly reducing the IT costs and technical thresholds of enterprises, and achieving efficient resource utilization and rapid business deployment.
+
+Three advantages：
+High cost-effectiveness: Users pay as needed, without the need to build their own data centers or purchase expensive hardware.
+Strong flexibility and scalability: Resources can be expanded or reduced at any time to adapt to business changes.
+High availability and reliability: Multi-point redundancy in data centers ensures the continuous and stable operation of services.
+
+Three disadvantages：
+Data security risk: Data is stored on third-party platforms, which may pose a risk of leakage or attack.
+Network dependence: The quality of service is significantly affected by network stability.
+Vendor lock-in issue: Migrating to other cloud platforms may involve technical compatibility and high migration costs.
+
+3. The primary function of a hypervisor in virtualization is to create and run virtual machines. It allows multiple virtual machines to run on a single physical host and manages the allocation of physical resources, ensuring isolation between virtual machines.
+
+4. A virtual machine is a computer system simulated through virtualization technology. It runs on a physical host and has its own virtual hardware, such as CPU, memory, hard disk, etc. It can run operating systems and applications just like a physical computer.
+
+5. Using virtual machines can achieve efficient resource utilization. Multiple independent operating systems can run on a single physical machine, reducing hardware costs. Meanwhile, virtual machines have excellent isolation and snapshot functions, which facilitate testing, backup and rapid recovery, enhancing system security and operation and maintenance efficiency.
+
+6.
+Server virtualization enhances resource utilization.
+Software testing is isolated from the development environment.
+Run applications on different operating systems.
+Set up an experimental or learning environment.
+Rapidly deploy and back up business systems.
+
+7. b) The operating system installed on a virtual machine
+
+8. c) Virtual machines run independently and are isolated from each other and the host system.
+
+9. c) It allows virtual machines to be moved between different physical machines with compatible hypervisors.
+
+10. The purpose of cloning a virtual machine is to quickly create a copy of the original virtual machine, saving the time of manual installation and configuration, and facilitating the rapid deployment of multiple identical environments.
