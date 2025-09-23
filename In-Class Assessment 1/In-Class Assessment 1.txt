@@ -1,0 +1,64 @@
+(a)
+1.  IaaS means Infrastructure as a Service. IaaS provides virtualized computing resources, such as virtual machines, storage, networks and operating systems, delivered over the Internet. Users have full control over the operating system, middleware, runtime environment and applications, while cloud service providers are responsible for maintaining the underlying physical hardware.
+
+Example:
+A development team needs to set up a custom testing and production environment for a large-scale distributed system. They use AWS EC2 to create multiple virtual machines and configure specific network topologies (such as VPC), load balancers and storage volumes. Developers can install the necessary development tools, databases (such as MySQL), and middleware on these virtual machines, fully controlling the environment configuration, just like in a local data center, but with the elastic scalability of the cloud.
+
+2. PaaS means Platform as a Service. PaaS provides a platform for developing, testing, deploying and managing applications. It abstracts the underlying infrastructure (servers, networks, operating systems). Developers only need to focus on code writing and application logic, while the platform is responsible for the runtime environment, database, development tools, and automatic scaling.
+
+Example:
+A start-up company is developing a Web application based on microservices. They use Google App Engine or Microsoft Azure App Service. They just need to upload the code (such as Python or Node.js) to the platform, and the platform will automatically handle deployment, scaling, load balancing and monitoring. Developers do not need to manage server or operating system patches and can focus on functional development and iteration.
+
+3. SaaS means Software as a Service. SaaS provides fully available applications via the Internet, which users access through clients (usually browsers). All underlying infrastructure, platforms and applications are managed by service providers. Users only need to use it without installation or maintenance.
+
+Example:
+A software development team uses GitHub (code hosting and collaboration), Jira (Project and Task Management), and Slack (team communication) as its daily development tools. These services are all SaaS applications: team members access them through a browser or client, without the need to install complex server software locally.
+
+
+(b)
+Docker is an open-source containerization platform that enables developers to package applications and all their dependencies (such as libraries, configuration files, runtime environments, etc.) into a lightweight and portable container. This container can run consistently in any Docker-supported environment, whether it is the developer's local machine, test server, or production cloud environment. Unlike traditional virtual machines, Docker containers share the operating system kernel of the host machine, thus being more lightweight, starting up faster, consuming less resources, and still maintaining good isolation.
+
+Scenario:
+Suppose a team is developing a Web application based on a microservices architecture, which includes the following components:
+
+A front-end service written in Node.js
+A back-end API service written in Python (Flask)
+A PostgreSQL database
+A Redis caching service
+
+Before containerization, developers had to manually install Node.js, Python environment, PostgreSQL and Redis locally, and configure complex dependencies and network connections. The environmental differences among different developers often lead to the problem of "it can run on my machine".
+
+However, with Docker, different developers can consistently run the same code.
+
+Containerization solves the problem of "it can run on my machine" by encapsulating applications and dependencies, ensuring consistency between the development, testing and production environments. It supports rapid environment setup, service isolation and high portability, simplifies CI/CD processes, facilitates independent deployment of microservices, and significantly improves resource utilization efficiency. It is a core technology for the efficient development and deployment of modern software.
+
+(c)
+1. docker pull n8nio/n8n
+This step is used to pull the n8n image.
+
+2. docker run -d --name n8n -p 5678:5678 -v n8n_data:/home/node/.n8n n8nio/n8n
+
+docker run: Create and start a new container
+
+-d: detached mode
+
+--name n8n: Specify the name "n8n" for the container
+
+-p 5678:5678: Port Mapping (Host port: Container port)
+
+(Here we use 5678 because the default port of n8n is 5678, which is easy to remember. If occupied, others can also be used.)
+
+-v n8n_data:/home/node/.n8n: Create a data volume to persist n8n data
+
+n8nio/n8n: The name of the image used
+
+
+
+
+
+
+
+
+
+
+
