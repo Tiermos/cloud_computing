@@ -48,6 +48,8 @@ docker run: Create and start a new container
 
 (Here we use 5678 because the default port of n8n is 5678, which is easy to remember. If occupied, others can also be used.)
 
+(Through learning, I have come to understand that in 5678:5678, the first one is the host port and can be modified, while the second one is the port of the n8n container and cannot be modified under normal circumstances. For example, changing it to 5678:1234 won't work, but 1234:5678 I can access it with http://127.0.0.1:1234/. This is a very good knowledge point.)
+
 -v n8n_data:/home/node/.n8n: Create a data volume to persist n8n data
 
 n8nio/n8n: The name of the image used
