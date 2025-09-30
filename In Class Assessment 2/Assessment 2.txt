@@ -1,0 +1,21 @@
+1. (a) An orchestration tool can automatically manage a large number of application servers. You tell it how many replicas of your application you want to run, and it will automatically schedule and maintain that number. If traffic increases, it can automatically scale up server instances; if traffic decreases, it scales them down—this is called auto-scaling. If any server instance fails, the tool quickly detects it and launches a replacement, ensuring uninterrupted service.
+
+(b) You only need to write a configuration file describing the desired state of your application, and the tool automatically makes it happen. When updating to a new version, it first starts instances with the new version, waits for them to become healthy, and then shuts down the old ones—ensuring users experience no downtime. It also performs regular "health checks" on applications to ensure only healthy instances receive user traffic.
+
+2. A Pod is the smallest unit of deployment, typically running one application container. A Deployment manages Pods, ensuring that a specified number of Pod replicas are always running and handling version updates. A Service provides a fixed network address as an entry point, distributing incoming traffic evenly across a group of identical Pods behind it.
+
+3. Namespaces act like isolated workspaces partitioned within a single Kubernetes cluster. Different teams or projects can use their own namespaces, allowing resource names to be reused without conflict. For example, the `kube-system` namespace is reserved specifically for Kubernetes system components.
+
+4. Kubelet is an agent program installed on each server node in the cluster. Its main job is to follow instructions—starting and stopping Pods on its local node and reporting the node's health status. To see which server nodes exist in the cluster, simply run the command `kubectl get nodes` in the terminal.
+
+5. ClusterIP is the default type, accessible only within the cluster—suitable for internal services. NodePort builds upon ClusterIP by opening a fixed port on each node’s IP address, allowing external access. LoadBalancer goes a step further by providing a dedicated external IP address (usually via cloud provider integration), making it the most straightforward way to expose a service publicly.
+
+6. It's simple—use a single command. Run `kubectl scale deployment your-app-name --replicas=5` in the terminal. Press Enter, and the system will immediately adjust the number of Pods to 5.
+
+7. Kubernetes’ default update strategy is zero-downtime. Simply issue a command to update to a new image version, for example: `kubectl set image deployment/app-name container-name=new-image:tag`. Kubernetes will gradually replace old Pods with new ones, ensuring service remains available throughout the process.
+
+8. Typically, you create a Service with type `LoadBalancer` or `NodePort` for the Deployment. Use the command `kubectl expose deployment your-app-name --type=LoadBalancer --port=80` to create an external load balancer that receives incoming traffic.
+
+9. The scheduler checks which node has sufficient CPU and memory resources to run the Pod. It also evaluates label-based rules you’ve defined—such as requiring or preferring that the Pod runs on nodes with specific labels. Based on all these conditions, it selects the most suitable node.
+
+10. A Service primarily handles internal service discovery and basic load balancing at Layer 4 (transport layer). In contrast, Ingress acts more like an intelligent gateway for web traffic at Layer 7 (application layer)—it can route requests to different backend Services based on the domain name or URL path being accessed. An Ingress controller must usually be installed before Ingress can function.
