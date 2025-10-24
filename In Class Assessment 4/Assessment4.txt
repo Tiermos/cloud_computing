@@ -1,0 +1,26 @@
+1. Serverless primarily solves the problem of manually managing servers and scaling in traditional microservice deployments. It allows developers to focus only on code without worrying about infrastructure.
+
+A better example: Handling sudden, sporadic traffic, like image processing. It runs only when there are requests and costs nothing when idle.
+
+A worse example: Services that need to run continuously for long periods or maintain state, such as database connection pools, because Serverless functions typically have runtime limits.
+
+2. Service Mesh provides advanced traffic control (like fine-grained routing and retries), built-in security (like automatic encryption), and observability features beyond pure Kubernetes networking. Kubernetes itself primarily only handles basic service discovery and load balancing.
+
+3. A Sidecar proxy is an auxiliary container that runs alongside your application. It intercepts and handles all network traffic entering and leaving the application. Its role is to decouple common functions like network management and security from your business code for unified processing.
+
+4. Istio provides precise traffic routing, retries, timeouts, circuit breaking, and fault injection.
+
+Example 1: Performing a canary release by directing only 10% of traffic to the new version to reduce risk.
+Example 2: Setting up automatic retries and circuit breaking to prevent failures from cascading when a service becomes unstable.
+
+5. Knative Serving automatically increases or decreases the number of Pods by monitoring the number of concurrent requests. It scales up when requests increase and scales down when requests decrease.
+
+6. Knative Eventing is responsible for managing and routing events. It allows services to easily respond to events from external systems, thus building event-driven applications.
+
+7. Knative leverages underlying Kubernetes components like Deployments and Services but hides them away. Developers only need to define a simple configuration, and Knative automatically generates and manages these resources, providing a Serverless platform-like experience.
+
+8. The core function of an InferenceService in KServe is to provide a unified, easy-to-manage service interface for your deployed machine learning model. It simplifies the deployment process; you just describe the model, and it handles service deployment and access.
+
+9. The request first goes to Istio, is then routed to the Pod managed by Knative, and finally, KServe loads the model and completes the prediction. Potential bottlenecks mainly occur when Knative starts a Pod from zero (cold start) or when the model inference itself takes too long.
+
+10. Istio's traffic weighting function can be used to direct a portion of user requests to a new version for A/B testing or canary releases. Compared to manual step-by-step rollouts, this method is more flexible and allows faster rollbacks, but the disadvantage is that the configuration is more complex and requires learning Service Mesh concepts.
