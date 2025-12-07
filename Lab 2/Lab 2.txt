@@ -1,0 +1,119 @@
+Lab 2
+
+Nebula VPN Experiment Report
+Experiment Overview
+
+This experiment aims to learn how to establish a secure overlay network in a NAT environment using Nebula VPN. NAT traversal is achieved through Lighthouse nodes deployed on cloud servers, enabling devices located in different internal network environments to be securely interconnected.
+Experimental principle
+1. Nebula VPN architecture
+
+Lighthouse (Lighthouse Node) : Deployed on cloud servers with public IP addresses, it serves as a central coordination node to assist nodes after NAT discovery of each other
+
+Ordinary node: Devices located behind NAT (such as home networks, enterprise intranets)
+
+Encrypted tunnel: All traffic is transmitted through a WireGuard-like encrypted tunnel
+
+2. NAT traversal mechanism
+
+Node registration: After each node is started, it registers its connection information with Lighthouse
+
+Connection coordination: When node A needs to connect to node B, the connection information is exchanged through Lighthouse
+
+Direct connection establishment: Establish a P2P direct connection where possible, and relay it through Lighthouse in case of failure
+
+3. Certificate System
+
+CA certificate: Root certificate, used to issue all node certificates
+
+Node certificate: A unique certificate for each device, containing IP address and identity information
+
+Certificate-based authentication: An alternative to traditional username/password authentication
+
+Analysis of Key Configuration Points
+
+By comparing the configuration files provided by the teacher, the following key configuration differences were discovered:
+Lighthouse configuration features
+
+am_lighthouse: true - Declares the local machine as Lighthouse
+
+Static IP mapping: Usually 192.168.100.1 is used
+
+Public listening port: 4242 (default)
+
+No other Lighthouse needs to be specified
+
+Configuration features of ordinary nodes:
+
+am_lighthouse: false - Declares as a regular node
+
+The public IP and port of Lighthouse need to be specified
+
+Configure a static IP address (such as 192.168.100.15)
+
+It may be necessary to configure the outbound port binding
+
+Certificate generation steps
+bash
+
+# 1. Generate a CA certificate
+nebula-cert ca -name "MyNetwork"
+
+# 2. Generate certificates for Lighthouse
+Nebune-cert sign-name "lighthouse" -ip "192.168.100.1/24"
+
+# 3. Generate certificates for each node
+Nebune-cert sign-name "node1" -ip "192.168.100.10/24"
+
+Experimental Difficulties and Simplification considerations
+Actual operational complexity
+
+Cloud server cost: It is necessary to apply for and configure a cloud server (Google Cloud, IONOS or Bandwagon).
+
+Multi-device coordination: At least 3 devices are required (1 cloud server +2 devices behind NAT)
+
+The network configuration is complex: firewall rules, security groups, etc. need to be configured
+
+Certificate Management: Multi-device certificate generation and distribution
+
+Simplified solution
+
+Considering the limitations of the experimental environment, the following simplified schemes can be adopted:
+
+Build a test environment using virtual machines: Use multiple virtual machines on a single machine to simulate different network environments
+
+Trial period for using free cloud services: Utilize the free quota provided by the cloud platform
+
+Phased implementation: First, build the basic environment, and then gradually add nodes
+
+Learning gains
+
+By studying the architecture and configuration of Nebula VPN, I have mastered the following knowledge points:
+Characteristics of modern VPN technology
+
+Certificate-based authentication system
+
+P2p-first connection strategy
+
+The design concept of encrypted overlay networks
+
+2. NAT traversal strategy
+
+Solve the NAT discovery problem by using the central coordination node
+
+Hybrid connection mode (direct connection + relay)
+
+Port prediction and hole drilling technology
+
+3. The concept of zero-trust networks
+
+Identity-based rather than location-based access control
+
+The Application of the Principle of Least Privilege in Networks
+
+The importance of end-to-end encryption
+
+Conclusion
+
+Although the construction of a complete experimental environment involves multiple steps and resource requirements, through the analysis of configuration files and the study of principles, the working mechanism of Nebula VPN has been deeply understood. In practical work, this Lighthouse based overlay network solution can effectively address network connection issues in scenarios such as distributed teams accessing internal network resources and IoT device management.
+
+Given the limitations of experimental conditions and the complexity of operations, this report focuses on principle learning and scheme analysis to achieve the learning goal of understanding the core concepts of modern overlay network technology.
