@@ -1,0 +1,56 @@
+GitHub Pages Personal Website Project Report
+I. Project Completion Status
+
+I successfully created and deployed a personal website in accordance with the project requirements. The following are the specific steps to complete
+GitHub account creation: A GitHub account has been registered
+Repository Settings: A dedicated repository named [My Username].github.io has been created
+Website creation: An index.html file was added to the repository as the home page
+Website release: The website has been successfully deployed and is accessible via https://[my username].github.io
+Version control: Code submission and management were carried out using Git
+
+Ii. Website Content
+
+The website design adheres to the principle of "simplicity and practicality", and only contains the most basic personal information:
+My name
+Gender
+Age
+Attend university
+College to which
+
+The website adopts a simple design style, without adding navigation bars, images or other complex elements, ensuring fast page loading and clear, easy-to-read information.
+Iii. Technical Implementation
+The technology used
+HTML5: Building Web Page structures
+CSS3: Beautify page styles
+GitHub Pages: Hosting and deploying websites
+
+2. Core features
+
+Responsive design: Automatically adapt to the screens of different devices
+The code is concise: just one HTML file with embedded CSS styles
+Simple deployment: GitHub automatically builds and publishes
+
+Iv. Learning Gains
+
+Through this project, I have mastered:
+The concept of static websites: Understood the differences between static websites and dynamic websites
+GitHub Pages Usage: Have you learned how to host websites with GitHub Pages
+Version control Basics: Practiced the basic operations of Git
+Web publishing process: Understood the complete process from coding to going live
+
+V. Project Verification
+
+The website has passed the following verifications:
+✓ It can be accessed normally through the specified URL
+✓ The entire page content is displayed
+✓ Render normally in different browsers
+The code structure is clear and concise
+
+Vi. Summary
+
+This project enabled me to personally experience the complete process of creating and publishing websites using GitHub Pages. Although the website design is simple, it fully meets the project requirements and reflects the core advantages of a static website hosting platform: no need for server management, simple deployment, and stable access.
+
+Most importantly, through practical operation, I have understood the actual application scenarios of PaaS (Platform as a Service), laying a foundation for learning more complex Web development in the future.
+
+Web site address: https://tiermos.github.io/
+Warehouse address: https://github.com/tiermos/tiermos.github.io
