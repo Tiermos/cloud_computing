@@ -1,0 +1,25 @@
+Lab4 Experiment Report
+
+Experimental purpose
+This experiment aims to deploy the Gitea code hosting platform in the local Windows environment through Docker Desktop, verify its support capability for Git LFS (Large File Storage), and complete the following tasks:
+Confirm whether Gitea supports LFS;
+Create a repository containing large files and upload them via LFS;
+Master the basic process of quickly setting up development tools using Docker.
+
+2. Experimental process
+（1）On a Windows computer with Docker Desktop installed, create a folder named GitEa-Lab and write the Docker-compose.yml file in it. Configure the use of the official Gitea image and the built-in SQLite database. Avoid additional dependencies.
+(2) In PowerShell, execute the command "docker-compose up -d" to start the Gitea container.
+(3) Open a browser to http://localhost:33333, complete the Gitea initialization setup, and create an administrator account.
+(4) After logging in, create a new repository named my-lfs-repo, and enter the Settings page of this repository. Manually check "Enable Git LFS" to enable the LFS function.
+(5) Install the Git LFS tool locally, clone the repository using Git Bash, generate a 100MB test file (1G is too large, so I use 100MB) (test.bin), and incorporate it into lfs management through the git LFS track command. And complete the submission and push.
+(6) Return to the Gitea webpage, view the details of this file, confirm that it is marked as "stored with Git LFS", and the repository LFS file statistics show "Total: 1".
+
+3. Experimental Results
+Successfully deployed the Gitea service locally via Docker;
+The Git LFS feature has been explicitly enabled in the repository Settings.
+A large file was successfully uploaded. The Gitea webpage correctly recognized and displayed that the file was stored by LFS.
+The repository page displays "LFS files stored in this repository (total: 1)", indicating that the LFS function is working properly.
+The experiment met all requirements, including verifying LFS support and large file processing.
+
+4. Personal Summary
+Through this experiment, I learned how to quickly deploy a fully functional code hosting platform using Docker, and Gitea can run without complex configuration. Although I was not very clear about the concept of LFS at the beginning, through practical operation, I understood its role in managing large files. The most crucial step in the experiment is to manually enable LFS in the repository Settings; otherwise, even if the git lfs command is used locally, the server will not accept the LFS object. The entire process enabled me to appreciate the significant advantages of containerized tools (such as Docker) in simplifying the setup of development environments, and I also mastered the basic usage methods of Git LFS, laying a foundation for handling large project files in the future.
