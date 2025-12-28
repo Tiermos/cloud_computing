@@ -1,0 +1,28 @@
+Kubernetes Hello Minikube Lab Report
+
+1. Objectives
+In this lab, I set up a local Kubernetes cluster using Minikube and deployed a sample application with kubectl. I explored the running Pods using commands like get, describe, logs, and exec. I exposed the application to external traffic using a Service. I scaled the Deployment to run multiple replicas and observed how requests were handled. I also performed a rolling update to a new image version and learned how to roll back if needed. The goal was to become familiar with basic Kubernetes workflows through hands-on practice.
+
+
+2. Step-by-Step Procedure
+
+2.1 Hello Minikube
+I started Minikube and created a deployment named hello-node using the agnhost:2.53 image, which runs an HTTP server on port 8080. I exposed it as a LoadBalancer service on the same port, and used minikube service hello-node to access it locally through a mapped NodePort like 30369. I checked the pod status with kubectl get pods and confirmed it was running, then viewed the logs to verify the server started correctly. I learned that in Minikube, LoadBalancer services don’t get an external IP but are accessible via the minikube service command. I also saw how deployments ensure pod availability and how services enable external access to pods. The whole setup worked without custom resource limits or network policies, using default configurations.
+
+2.2 Deploy an Application Using a Deployment
+I deployed a Kubernetes Deployment named kubernetes-bootcamp using the image gcr.io/google-samples/kubernetes-bootcamp:v1 with one replica. I verified the pod was running on the default namespace and noted it exposed port 8080 internally. To access the application, I started kubectl proxy on localhost:8001 and used curl.exe to send a request to the pod’s proxied endpoint. I learned that direct pod access requires the API proxy path and that PowerShell’s built-in curl alias interferes with URL syntax containing colons. I also confirmed that Deployments automatically manage pod lifecycle and ensure desired state without manual intervention.
+
+2.3 Explore the Application (Pods)
+I ran kubectl get pods and found my application pod was running. Using kubectl describe pod, I saw it used port 8080 and had no resource limits configured. I checked the logs with kubectl logs and confirmed the app started successfully. Then I executed kubectl exec -it <pod-name> -- sh to enter the container and verified the environment variables and local service response via wget http://localhost:8080. I learned that a pod in Kubernetes groups tightly coupled containers sharing the same network and storage, and that troubleshooting relies heavily on these basic kubectl commands. I also noticed the pod was scheduled on the default node managed by Docker Desktop.
+
+2.4 Expose the Application Using a Service
+I deployed the kubernetes-bootcamp application and exposed it using a NodePort service on port 8080, which mapped to an external port like 31234. Since I’m using Minikube with Docker Desktop on Windows, I accessed the app via the URL from minikube service kubernetes-bootcamp --url (e.g., http://127.0.0.1:51234) and confirmed it responded correctly with curl. I then used labels such as app=kubernetes-bootcamp to select Pods and added a custom label version=v1 to a Pod, verifying it with label-based queries. I learned that Services enable external access independently of Pod lifecycle, and that labels provide a flexible way to group and manage resources without modifying their configuration.
+
+2.5 Scale the Application
+I first exposed the kubernetes-bootcamp deployment as a LoadBalancer service on port 8080. Using kubectl scale, I increased replicas from 1 to 4 and verified the change with kubectl get pods, which showed four running pods with distinct IPs. To test load balancing on my Windows machine with Docker Desktop, I ran minikube service kubernetes-bootcamp --url in a separate terminal to get a local URL , then used curl multiple times and observed responses from different pods. I later scaled down to 2 replicas and confirmed two pods remained. This taught me how manual scaling directly controls pod count and how Kubernetes services distribute traffic across available pods without additional configuration.
+
+2.6 Perform a Rolling Update and Rollback
+I deployed a Kubernetes application using kubectl create deployment with version v1 and exposed it via a ClusterIP service. In a separate PowerShell window, I ran kubectl port-forward to forward the service port 8080 to my local machine, allowing me to access the app at http://localhost:8080. After verifying the initial version, I performed a rolling update to v2 using kubectl set image, and confirmed the update by checking the returned content which displayed "v=2". During the process, I learned how to effectively use port-forward for local development and testing, avoiding complexities with NodePort configurations. I also observed the seamless transition of pods during the rolling update, ensuring zero downtime.
+
+3. Conclusion
+I completed all the core tasks: creating a Minikube cluster, deploying an app, inspecting Pods, exposing a Service, scaling replicas, and updating the application. Through this process, I learned how to use common kubectl commands effectively and understood how Deployments manage Pods. I saw how Services enable access to applications and how scaling works in practice. I also practiced updating an app without downtime and reverting changes when necessary. This lab helped me build confidence in using Kubernetes for basic application management.
