@@ -3,9 +3,9 @@ I. Project Completion Status
 
 I successfully created and deployed a personal website in accordance with the project requirements. The following are the specific steps to complete
 GitHub account creation: A GitHub account has been registered
-Repository Settings: A dedicated repository named [My Username].github.io has been created
+Repository Settings: A dedicated repository named tiermos.github.io has been created
 Website creation: An index.html file was added to the repository as the home page
-Website release: The website has been successfully deployed and is accessible via https://[my username].github.io
+Website release: The website has been successfully deployed and is accessible via https://tiermos.github.io
 Version control: Code submission and management were carried out using Git
 
 Ii. Website Content
