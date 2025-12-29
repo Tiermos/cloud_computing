@@ -1,0 +1,10 @@
+Istio Bookinfo Lab Report
+
+1. Objectives
+I wanted to quickly evaluate Istio’s basic service mesh capabilities using the Bookinfo sample application on my local Kubernetes cluster. I used Docker Desktop with Minikube on Windows and performed all operations through WSL2 for compatibility. Through this experiment, I learned how to install Istio with a demo profile, enable automatic sidecar injection, deploy an application, expose it via a Kubernetes Gateway, and visualize traffic using Kiali. The process helped me understand the practical workflow of integrating Istio into an existing cluster without deep configuration.
+
+2.Experimental Procedure
+I downloaded Istio 1.28.2 in WSL2 and added istioctl to my PATH. I installed Istio using the demo-profile-no-gateways.yaml file to avoid default gateways, then labeled the default namespace for automatic sidecar injection. I applied the Kubernetes Gateway API CRDs (v1.4.0), deployed the Bookinfo application, and confirmed all pods were in READY 2/2 state. I created a Gateway and HTTPRoute using bookinfo-gateway.yaml and annotated the gateway to use ClusterIP service type. I accessed the app locally via kubectl port-forward to svc/bookinfo-gateway-istio on port 8080 and verified it in my browser. Finally, I deployed Kiali and opened its dashboard to observe service topology, learning how Istio visualizes mesh traffic and dependencies.
+
+3. Conclusion
+This hands-on exercise gave me a clear, step-by-step understanding of Istio’s core operational flow—from installation to traffic exposure and observability. I learned how to configure namespaces for sidecar injection, use Kubernetes Gateway API resources instead of Istio-native gateways, and access dashboards like Kiali for real-time mesh visualization. The experience clarified the practical integration points between Istio and standard Kubernetes resources, which will help me explore advanced features like traffic shifting or fault injection next.

@@ -4,7 +4,7 @@ Kubernetes Hello Minikube Lab Report
 In this lab, I set up a local Kubernetes cluster using Minikube and deployed a sample application with kubectl. I explored the running Pods using commands like get, describe, logs, and exec. I exposed the application to external traffic using a Service. I scaled the Deployment to run multiple replicas and observed how requests were handled. I also performed a rolling update to a new image version and learned how to roll back if needed. The goal was to become familiar with basic Kubernetes workflows through hands-on practice.
 
 
-2. Step-by-Step Procedure
+2. Experimental Procedure
 
 2.1 Hello Minikube
 I started Minikube and created a deployment named hello-node using the agnhost:2.53 image, which runs an HTTP server on port 8080. I exposed it as a LoadBalancer service on the same port, and used minikube service hello-node to access it locally through a mapped NodePort like 30369. I checked the pod status with kubectl get pods and confirmed it was running, then viewed the logs to verify the server started correctly. I learned that in Minikube, LoadBalancer services don’t get an external IP but are accessible via the minikube service command. I also saw how deployments ensure pod availability and how services enable external access to pods. The whole setup worked without custom resource limits or network policies, using default configurations.
