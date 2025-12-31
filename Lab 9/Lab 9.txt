@@ -1,0 +1,20 @@
+Knative Serverless Applications Lab Report
+
+1. Objectives
+In this lab, I will set up Knative Serving, Eventing, and Functions on a local Kubernetes cluster. I will create a function using the func CLI with a local container registry and skip the deployment step as instructed. I will build and run the function locally to verify its behavior. I will deploy a basic “Hello World” Knative Service using YAML and confirm it scales to zero when idle. I will also configure a simple event-driven workflow using a PingSource, Broker, Trigger, and a Knative Service as the event sink. All components will be tested using kubectl and kn commands.
+
+
+2. Experiment Procedure
+2.1 Work with Knative Functions 
+I installed the func CLI on Windows and created a Go function named "hello" using func create -l go hello. I set the FUNC_REGISTRY environment variable to localhost:5000 to avoid external registries. After entering the project directory, I ran func build, but it failed to pull the builder image from ghcr.io due to network issues despite my proxy being active. I then manually pulled the required builder image using Docker after configuring Docker Desktop to use my local HTTP proxy at 127.0.0.1:7890. Once the image was available locally, func build succeeded, and I ran the function locally with func run, which started the service on port 8080. I verified it worked by calling func invoke and learned that func relies on local Docker connectivity and proper proxy settings for image operations.
+
+2.2 Deploy and Test a Knative Service  
+I deployed the Knative Service using the provided hello.yaml file with the ghcr.io/knative/helloworld-go:latest image, exposing container port 8080 and setting the TARGET environment variable to "World". After applying the manifest, I confirmed the service was created and eventually became ready, showing a valid URL under the default namespace. I accessed the service via curl using the generated domain ending with .sslip.io and successfully received the response "Hello World!". I then updated the TARGET value to "Knative" and reapplied the configuration, which triggered a new Revision. To test traffic splitting, I added a traffic section in the YAML to split requests evenly between the two Revisions, and observed alternating responses upon repeated curl calls. Through this, I learned how Knative manages Revisions and routes traffic without manual intervention.
+
+2.3 Configure and Verify a Basic Knative Eventing Flow  
+I deployed the CloudEvents Player service using Knative Serving with the image pulled from my local registry at host.minikube.internal:6000, ensuring Minikube was started with --insecure-registry to allow HTTP access. I set min-scale to 1 to keep the pod always running and exposed port 8080 as required by the application. The service eventually became ready, and I was able to access it via kubectl port-forward. I created a Broker, a SinkBinding, and a Trigger to route events, and through the web UI, I successfully sent and received CloudEvents, confirming the eventing flow worked end-to-end. I learned that local registry configuration and insecure registry settings are critical for offline Knative deployments, and that event routing in Knative relies on proper binding between services and brokers.
+
+
+3. Conclusion
+I completed the setup of Knative Serving, Eventing, and Functions on my local cluster. I created and built a function using the func CLI with a local registry and verified it runs correctly without deploying it to the cluster. I deployed a Knative Service and confirmed it responds to HTTP requests and scales down when idle. I also configured a minimal eventing pipeline that generates periodic events and delivers them to a service via a Broker and Trigger. This lab gave me direct experience with core Knative workflows for serverless applications.
+
