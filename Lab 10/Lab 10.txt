@@ -1,0 +1,10 @@
+Deploying a Predictive Model with KServe on Minikube Lab Report
+
+1. Objectives
+In this lab, I will install and configure KServe on a Minikube-based Kubernetes cluster using the quickstart guide. I will deploy a predictive machine learning model as an InferenceService using a public or self-prepared model stored in cloud or local storage. I will check the status of the InferenceService and troubleshoot issues such as pod failures or missing storage initializers. I will determine how to access the service from outside the cluster using port-forwarding or ingress settings. Finally, I will send JSON-formatted inference requests to the endpoint and record the prediction results.
+
+2. Step-by-Step Procedure
+I installed KServe on Minikube following the official quickstart, enabled Istio and Knative Serving as dependencies, and labeled my namespace for model serving. I created an InferenceService YAML for a scikit-learn model hosted on a public bucket, applied it, and waited for the pod to become ready. I used kubectl describe and logs to debug a startup error caused by incorrect storage URI format. Once the service was ready, I used kubectl port-forward to access the Istio ingress gateway, constructed a curl request with the correct Host header, and sent sample input data to get predictions.
+
+3. Conclusion
+I successfully installed KServe on Minikube and deployed a scikit-learn–based predictive model as an InferenceService. I verified the pod was running and resolved an initial issue related to namespace labeling that prevented model loading. I used port-forwarding to reach the Istio ingress gateway and constructed a valid Host header to route requests to my service. I sent inference requests with sample input data and received correct class predictions in the response. This lab confirmed that KServe can simplify model deployment without writing custom serving code.
